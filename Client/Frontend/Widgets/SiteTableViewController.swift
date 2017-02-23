@@ -12,7 +12,7 @@ struct SiteTableViewControllerUX {
     static let HeaderTextColor = UIAccessibilityDarkerSystemColorsEnabled() ? UIColor.black : UIColor(rgb: 0x232323)
     static let HeaderBackgroundColor = UIColor(rgb: 0xf7f8f7).withAlphaComponent(0.3)
     static let HeaderFont = UIFont.systemFont(ofSize: 12, weight: UIFontWeightMedium)
-    static let HeaderTextMargin = CGFloat(10)
+    static let HeaderTextMargin = CGFloat(16)
 }
 
 class SiteTableViewHeader: UITableViewHeaderFooterView {
@@ -33,7 +33,7 @@ class SiteTableViewHeader: UITableViewHeaderFooterView {
         bottomBorder.backgroundColor = SiteTableViewControllerUX.HeaderBorderColor
         contentView.backgroundColor = UIColor(rgb: 0xf7f8f7)
 
-        titleLabel.font = DynamicFontHelper.defaultHelper.DeviceFontSmallLight
+        titleLabel.font = DynamicFontHelper.defaultHelper.DeviceFontSmallBold
         titleLabel.textColor = SiteTableViewControllerUX.HeaderTextColor
         titleLabel.textAlignment = .left
 

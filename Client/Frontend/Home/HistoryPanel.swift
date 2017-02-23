@@ -374,7 +374,6 @@ class HistoryPanel: SiteTableViewController, HomePanel {
         cell.detailTextLabel!.text = ""
         cell.imageView!.image = UIImage(named: "recently_closed")
         cell.imageView?.backgroundColor = UIColor.white
-        cell.imageView!.highlightedImage = cell.imageView!.image
         if !hasRecentlyClosed {
             cell.textLabel?.alpha = 0.5
             cell.imageView!.alpha = 0.5
@@ -389,7 +388,6 @@ class HistoryPanel: SiteTableViewController, HomePanel {
         cell.detailTextLabel!.text = self.syncDetailText
         cell.imageView!.image = UIImage(named: "synced_devices")
         cell.imageView?.backgroundColor = UIColor.white
-        cell.imageView!.highlightedImage = cell.imageView!.image
         return cell
     }
 
