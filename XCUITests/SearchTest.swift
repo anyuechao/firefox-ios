@@ -23,9 +23,7 @@ class SearchTests: BaseTestCase {
     }
     
     private func suggestionsOnOff() {
-        app.buttons["TabToolbar.menuButton"].tap()
-        app.collectionViews.cells["SettingsMenuItem"].tap()
-        app.tables["AppSettingsTableViewController.tableView"].staticTexts["Yahoo"].tap()
+        navigator.goto(SearchSettings)
         app.tables.switches["Show Search Suggestions"].tap()
         app.navigationBars["Search"].buttons["Settings"].tap()
         app.navigationBars["Settings"].buttons["AppSettingsTableViewController.navigationItem.leftBarButtonItem"].tap()
@@ -98,7 +96,6 @@ class SearchTests: BaseTestCase {
         
         // Typing space and char after / should show suggestions again
         app.textFields["address"].typeText(" b")
-        print(app.debugDescription)
         waitforExistence(app.tables["SiteTable"].buttons["foobar burn cd"])
     }
     
@@ -152,10 +149,8 @@ class SearchTests: BaseTestCase {
     
     func testSearchEngine() {
         // First time the menu to change the search engine is open
-        app.buttons["TabToolbar.menuButton"].tap()
-        app.collectionViews.cells["SettingsMenuItem"].tap()
-        app.tables["AppSettingsTableViewController.tableView"].staticTexts["Search"].tap()
-        
+        navigator.goto(SearchSettings)
+
         // Check that the default search engine is yahoo
         XCTAssert(app.tables.staticTexts["Yahoo"].exists)
         app.tables.staticTexts["Yahoo"].tap()
