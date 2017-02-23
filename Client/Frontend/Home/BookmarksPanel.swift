@@ -197,6 +197,8 @@ class BookmarksPanel: SiteTableViewController, HomePanel {
                 cell.imageView?.image = UIImage(named: url.host!)
             } else {
                 cell.imageView?.setIcon(bookmark.favicon, forURL: URL(string: item.url))
+                cell.imageView?.image = cell.imageView?.image?.createScaled(CGSize(width: 23, height: 23))
+                cell.imageView?.contentMode = .center
             }
             return cell
         case is BookmarkSeparator:
