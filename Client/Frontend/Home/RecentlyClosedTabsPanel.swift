@@ -99,7 +99,12 @@ class RecentlyClosedTabsPanelSiteTableViewController: SiteTableViewController {
         let displayURL = tab.url.displayURL ?? tab.url
         twoLineCell.setLines(tab.title, detailText: displayURL.absoluteDisplayString)
         let site: Favicon? = (tab.faviconURL != nil) ? Favicon(url: tab.faviconURL!, type: .guess) : nil
-        cell.imageView?.setIcon(site, forURL: displayURL)
+        cell.imageView!.layer.borderColor = UIColor(white: 0, alpha: 0.1).cgColor
+        cell.imageView!.layer.borderWidth = 0.5
+        cell.imageView?.setIcon(site, forURL: displayURL, completed: { (color, url) in
+            cell.imageView?.image = cell.imageView?.image?.createScaled(CGSize(width: 23, height: 23))
+            cell.imageView?.contentMode = .center
+        })
         return cell
     }
 

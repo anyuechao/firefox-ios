@@ -9,7 +9,7 @@ class BackForwardTableViewCell: UITableViewCell {
     
     struct BackForwardViewCellUX {
         static let bgColor = UIColor(colorLiteralRed: 0.7, green: 0.7, blue: 0.7, alpha: 1)
-        static let faviconWidth = 20
+        static let faviconWidth = 29
         static let faviconPadding: CGFloat = 20
         static let labelPadding = 20
         static let borderSmall = 2
@@ -21,6 +21,8 @@ class BackForwardTableViewCell: UITableViewCell {
         let faviconView = UIImageView(image: FaviconFetcher.defaultFavicon)
         faviconView.backgroundColor = UIColor.white
         faviconView.layer.cornerRadius = 6
+        faviconView.layer.borderWidth = 0.5
+        faviconView.layer.borderColor = UIColor(white: 0, alpha: 0.1).cgColor
         faviconView.layer.masksToBounds = true
         return faviconView
     }()
@@ -46,7 +48,10 @@ class BackForwardTableViewCell: UITableViewCell {
     var site: Site? {
         didSet {
             if let s = site {
-                faviconView.setFavicon(forSite: s)
+                faviconView.setFavicon(forSite: s, onCompletion: { (color, url) in
+                    self.faviconView.image = self.faviconView.image?.createScaled(CGSize(width: 23, height: 23))
+                    self.faviconView.contentMode = .center
+                })
                 var title = s.title
                 if title.isEmpty {
                     title = s.url

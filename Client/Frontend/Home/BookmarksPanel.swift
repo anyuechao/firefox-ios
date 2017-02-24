@@ -196,6 +196,8 @@ class BookmarksPanel: SiteTableViewController, HomePanel {
             if let url = bookmark.favicon?.url.asURL, url.scheme == "asset" {
                 cell.imageView?.image = UIImage(named: url.host!)
             } else {
+                cell.imageView!.layer.borderColor = UIColor(white: 0, alpha: 0.1).cgColor
+                cell.imageView!.layer.borderWidth = 0.5
                 cell.imageView?.setIcon(bookmark.favicon, forURL: URL(string: item.url))
                 cell.imageView?.image = cell.imageView?.image?.createScaled(CGSize(width: 23, height: 23))
                 cell.imageView?.contentMode = .center
@@ -395,7 +397,6 @@ extension BookmarksPanel: BookmarkFolderTableViewHeaderDelegate {
 }
 
 class BookmarkFolderTableViewCell: TwoLineTableViewCell {
-    fileprivate let ImageMargin: CGFloat = 12
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -404,24 +405,12 @@ class BookmarkFolderTableViewCell: TwoLineTableViewCell {
         textLabel?.tintColor = BookmarksPanelUX.BookmarkFolderTextColor
 
         imageView?.image = UIImage(named: "bookmarkFolder")
-
-        let chevron = ChevronView(direction: .right)
-        chevron.tintColor = BookmarksPanelUX.BookmarkFolderTextColor
-        chevron.frame = CGRect(x: 0, y: 0, width: BookmarksPanelUX.BookmarkFolderChevronSize, height: BookmarksPanelUX.BookmarkFolderChevronSize)
-        chevron.lineWidth = BookmarksPanelUX.BookmarkFolderChevronLineWidth
-        accessoryView = chevron
-
+        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         separatorInset = UIEdgeInsets.zero
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        // Do this here as TwoLineTableViewCell changes the imageView frame
-        // in its own layoutSubviews, and we have to make sure it is right.
-        if let imageSize = imageView?.image?.size {
-            imageView?.frame = CGRect(x: ImageMargin, y: (frame.height - imageSize.width) / 2, width: imageSize.width, height: imageSize.height)
-        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -441,7 +430,7 @@ fileprivate class BookmarkFolderTableViewHeader: UITableViewHeaderFooterView {
     lazy var chevron: ChevronView = {
         let chevron = ChevronView(direction: .left)
         chevron.tintColor = UIConstants.HighlightBlue
-        chevron.lineWidth = BookmarksPanelUX.BookmarkFolderChevronLineWidth
+        chevron.lineWidth = 2
         return chevron
     }()
 

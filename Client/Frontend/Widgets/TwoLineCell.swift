@@ -13,7 +13,7 @@ struct TwoLineCellUX {
     static let BorderFrameSize: CGFloat = 32
     static let TextColor = UIAccessibilityDarkerSystemColorsEnabled() ? UIColor.black : UIColor(rgb: 0x333333)
     static let DetailTextColor = UIAccessibilityDarkerSystemColorsEnabled() ? UIColor.darkGray : UIColor.gray
-    static let DetailTextTopMargin: CGFloat = 2
+    static let DetailTextTopMargin: CGFloat = 0
 }
 
 class TwoLineTableViewCell: UITableViewCell {

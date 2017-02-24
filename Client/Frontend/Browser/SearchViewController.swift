@@ -533,7 +533,12 @@ extension SearchViewController {
                     let isBookmark = site.bookmarked ?? false
                     cell.setLines(site.title, detailText: site.url)
                     cell.setRightBadge(isBookmark ? self.bookmarkedBadge : nil)
-                    cell.imageView?.setIcon(site.icon, forURL: site.tileURL)
+                    cell.imageView!.layer.borderColor = UIColor(white: 0, alpha: 0.1).cgColor
+                    cell.imageView!.layer.borderWidth = 0.5
+                    cell.imageView?.setIcon(site.icon, forURL: site.tileURL, completed: { (color, url) in
+                        cell.imageView?.image = cell.imageView?.image?.createScaled(CGSize(width: 23, height: 23))
+                        cell.imageView?.contentMode = .center
+                    })
                 }
             }
             return cell
